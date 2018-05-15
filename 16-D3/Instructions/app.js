@@ -25,7 +25,6 @@ var svg = d3
 var xBandScale = d3
     .scaleLinear()
     .range([0,chartWidth])
-    // .padding(.5);
 
 var yLinearScale = d3
     .scaleLinear()
@@ -34,25 +33,24 @@ var yLinearScale = d3
     
 // Load Data
 d3.csv('data.csv',function(error,data){
-    if (error) throw error;
-    // console.log(data)
+    // if (error) throw error;
+    //     console.log(data)
     data.forEach(function(element) {
-        element.Poverty = +element.Poverty;
-        element.HighSchool = +element.HighSchool;})
-        console.log(data)
-
+        element.poverty = +element.poverty;
+        element.healthcare = +element.healthcare;})
+        console.log(data);
     xBandScale
-    .domain(d3.extent(data,d => d.Poverty))
+    .domain(d3.extent(data,d => d.poverty))
     .nice();
    
     yLinearScale 
-    .domain(d3.extent(data,d => d.HighSchool))
+    .domain(d3.extent(data,d => d.healthcare))
     .nice();
 
-    var thing = d3.max(data,function(response){
-        return response.Poverty});
+    var dataPoint = d3.max(data,function(response){
+        return response.poverty});
 
-    console.log(thing);
+    console.log(dataPoint);
 
     var xaxis = d3.axisBottom(xBandScale);
     var yaxis = d3.axisLeft(yLinearScale);
@@ -62,8 +60,8 @@ d3.csv('data.csv',function(error,data){
     .data(data)
     .enter()
         .append('circle')
-        .attr('cx', d => xBandScale(d.Poverty))
-        .attr('cy', d => yLinearScale(d.HighSchool))
+        .attr('cx', d => xBandScale(d.poverty))
+        .attr('cy', d => yLinearScale(d.healthcare))
         .attr('r',10)
         .style("stroke", "steelblue")
         .attr("fill-opacity", .6)
@@ -73,10 +71,10 @@ d3.csv('data.csv',function(error,data){
     .data(data)
     .enter()
         .append('text')
-        .attr('x', d => xBandScale(d.Poverty))
-        .attr('y', d => yLinearScale(d.HighSchool-.1))
+        .attr('x', d => xBandScale(d.poverty))
+        .attr('y', d => yLinearScale(d.healthcare-.1))
         .style('text-anchor','middle')
-        .text(d=>d.State)
+        .text(d=>d.abb)
         .attr("fill", "white")
         .attr("font-size",10)
         .attr("font-family","sans-serif");
@@ -106,8 +104,9 @@ d3.csv('data.csv',function(error,data){
     .attr("x",0 - (chartHeight / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Percentage w/out Secondary Education")
+    .text("Percentage without Healthcare")
     .attr("font-size",15)
     .attr("font-family","sans-serif");      
   
-})
+});
+
