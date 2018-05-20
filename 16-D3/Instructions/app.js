@@ -32,13 +32,20 @@ var yLinearScale = d3
 
     
 // Load Data
-d3.csv('data.csv',function(error,data){
-    // if (error) throw error;
-    //     console.log(data)
-    data.forEach(function(element) {
-        element.poverty = +element.poverty;
-        element.healthcare = +element.healthcare;})
-        console.log(data);
+d3.csv("./data.csv", function(error, data) {
+    if (error) console.error;
+    console.log(data);
+    // log a list of names
+    var names = data.map(data => data.poverty);
+    console.log("poverty", names);
+
+  // Cast the hours value to a number for each piece of tvData
+//   tvData.forEach(function (data) {
+//     data.hours = +data.hours;
+//     console.log("Name:", data.name);
+//     console.log("Hours:", data.hours);
+// });
+
     xBandScale
     .domain(d3.extent(data,d => d.poverty))
     .nice();
@@ -107,6 +114,7 @@ d3.csv('data.csv',function(error,data){
     .text("Percentage without Healthcare")
     .attr("font-size",15)
     .attr("font-family","sans-serif");      
-  
 });
+
+
 
