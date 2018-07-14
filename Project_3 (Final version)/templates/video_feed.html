@@ -1,0 +1,17 @@
+
+{% extends 'layout.html' %}
+{% block body %}
+	<h1>Interactive Wecame</h1>
+	<!-- <h3><a href="/video_feed/on">Click to capture</a></h3> -->
+	<div class = "w3-row w3-padding-64" id = "mission"> 
+		<div class = "w3-col m6 w3-padding-large w3-hide-small"> 
+			<h4>Demo</h4>
+			<iframe width = "500" height = "320" src = "https://www.youtube.com/embed/-nebZ7UlwYw" allow="autoplay;" allowfullscreen = True>Demo</iframe>
+			<br>
+			<p>Click on the button whenever you are ready!</p>
+			<a class="btn btn-primary" href="/video_feed/on">Click to capture</a>
+		</div>
+	</div>
+
+{% endblock %}
+
